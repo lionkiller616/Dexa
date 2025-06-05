@@ -1,64 +1,56 @@
 """
-Daxa Core Language Package (V3 - Unified Block Language).
+Daxa Core Language Package (V4 - Unified Document & Data Language).
 
-Handles the fundamental parsing, validation, schema management, data representation,
-and serialization for the Daxa language and its various block types.
+Handles the fundamental parsing of Daxa documents, schema definitions, data
+representation, validation, and serialization. It forms the bedrock for processing
+.daxa, .dx (data-focused), and .dxc (config-focused) files.
 """
-# flake8: noqa: F401 (import all for easy access by other Daxa modules)
+# flake8: noqa: F401
 
 from .common import (
     DaxaError, DaxaParsingError, DaxaValidationError, DaxaSchemaError,
-    DaxaIOError, DaxaInternalError, DaxaBlockTypeEnum, # New enum for block types
-    DaxaTypeEnum, SourceLocation, DAXA_VERSION,
-    DAXA_MAIN_FILE_MAGIC_COMMENT, # For .daxa general files
-    DAXA_BINARY_MAGIC_NUMBER, DAXA_BINARY_FORMAT_VERSION,
-    # ... other constants from common if needed
+    DaxaIOError, DaxaInternalError, DaxaRenderingError, DaxaBlockTypeEnumV4,
+    DaxaTypeEnumV4, SourceLocation, DAXA_VERSION_V4,
+    DAXA_FILE_MAGIC_COMMENT_V4,
+    DAXA_BINARY_MAGIC_NUMBER_V4, DAXA_BINARY_FORMAT_VERSION_V4,
 )
-from .daxa_value import (
-    DaxaValue, DaxaObject, DaxaArray, PYTHON_TO_DAXA_TYPE_MAP, PythonNative
+from .daxa_value import ( # V4: Mostly stable but used by new parser logic
+    DaxaValue, DaxaObject, DaxaArray, PYTHON_TO_DAXA_TYPE_MAP_V4, PythonNativeV4
 )
-# diagram.py and math_equation.py primarily define the *definition* classes
-# that hold raw content and potentially an AST passed from specialized parsers.
-from .diagram import DiagramDefinition # Will mostly be for DXD (new V2 syntax from your spec)
-# math_equation.py might not be needed in core if MathBlock in document.model stores raw Math only.
-# Or it could define MathEquationDefinition similar to DiagramDefinition. Let's assume basic for now.
-# from .math_equation import MathEquationDefinition # (Conceptual - create this file if needed)
+from .diagram import DiagramDefinitionV4 # V4: Holds raw DXD v2 (DOT-like) content
+from .math_equation import MathEquationDefinitionV4 # V4: Holds raw DaxaMath v2 content
 
-from .schema import (
-    Schema, DaxaType, Field,
-    StructDefinition, EnumDefinition, TypeAliasDefinition, ConstantDefinition, # These are Daxa type system defs
-    Constraint, LengthConstraint, RangeConstraint, RegexConstraint
+from .schema import ( # V4: Schema definitions as parsed from `struct/enum/type/const` keywords
+    SchemaV4, DaxaTypeV4, FieldV4,
+    StructDefinitionV4, EnumDefinitionV4, TypeAliasDefinitionV4, ConstantDefinitionV4,
+    ConstraintV4, LengthConstraintV4, RangeConstraintV4, RegexConstraintV4
 )
-# The main parser for .daxa documents that understand blocks
-from .parser_main import DaxaMainParser
-# The main writer for .daxa documents
-from .writer_main import DaxaMainWriter
+# Main parser for .daxa, .dx, .dxc documents
+from .parser_main import DaxaMainParserV4
+# Main writer for these document types
+from .writer_main import DaxaMainWriterV4
 
-from .validator import DaxaValidator
+from .validator import DaxaValidatorV4
 
-# Binary format (less emphasis in V3 doc-centric model, but still for data sections)
-from .parser_binary import DaxaBinaryParser
-from .writer_binary import DaxaBinaryWriter
-
+# Binary format for .dex data sections
+from .parser_binary import DaxaBinaryParserV4
+from .writer_binary import DaxaBinaryWriterV4
 
 __all__ = [
-    # Common
     "DaxaError", "DaxaParsingError", "DaxaValidationError", "DaxaSchemaError",
-    "DaxaIOError", "DaxaInternalError", "DaxaBlockTypeEnum",
-    "DaxaTypeEnum", "SourceLocation", "DAXA_VERSION", "DAXA_MAIN_FILE_MAGIC_COMMENT",
-    "DAXA_BINARY_MAGIC_NUMBER", "DAXA_BINARY_FORMAT_VERSION",
-    # Daxa Value
-    "DaxaValue", "DaxaObject", "DaxaArray", "PYTHON_TO_DAXA_TYPE_MAP", "PythonNative",
-    # Diagram/Math (Definition holders)
-    "DiagramDefinition", # "MathEquationDefinition", (if created)
-    # Schema Components (Type System)
-    "Schema", "DaxaType", "Field",
-    "StructDefinition", "EnumDefinition", "TypeAliasDefinition", "ConstantDefinition",
-    "Constraint", "LengthConstraint", "RangeConstraint", "RegexConstraint",
-    # Main Parser/Writer for .daxa documents
-    "DaxaMainParser", "DaxaMainWriter",
-    # Validator
-    "DaxaValidator",
-    # Binary Data Codec
-    "DaxaBinaryParser", "DaxaBinaryWriter",
+    "DaxaIOError", "DaxaInternalError", "DaxaRenderingError", "DaxaBlockTypeEnumV4",
+    "DaxaTypeEnumV4", "SourceLocation", "DAXA_VERSION_V4",
+    "DAXA_FILE_MAGIC_COMMENT_V4", "DAXA_BINARY_MAGIC_NUMBER_V4", "DAXA_BINARY_FORMAT_VERSION_V4",
+
+    "DaxaValue", "DaxaObject", "DaxaArray", "PYTHON_TO_DAXA_TYPE_MAP_V4", "PythonNativeV4",
+    
+    "DiagramDefinitionV4", "MathEquationDefinitionV4",
+    
+    "SchemaV4", "DaxaTypeV4", "FieldV4",
+    "StructDefinitionV4", "EnumDefinitionV4", "TypeAliasDefinitionV4", "ConstantDefinitionV4",
+    "ConstraintV4", "LengthConstraintV4", "RangeConstraintV4", "RegexConstraintV4",
+    
+    "DaxaMainParserV4", "DaxaMainWriterV4",
+    "DaxaValidatorV4",
+    "DaxaBinaryParserV4", "DaxaBinaryWriterV4",
 ]

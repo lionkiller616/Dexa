@@ -1,1 +1,70 @@
- 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtualenv
+.venv
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# IDE specific
+.idea/
+.vscode/
+*.project
+*.sublime-project
+*.sublime-workspace
+
+# Daxa specific outputs / cache
+*.daxa~
+*.daxa.bak
+*.dex     # Daxa compiled binary files
+*.html    # Rendered output examples
+*.svg     # Rendered output examples
+*.png     # Rendered output examples
+*.pdf     # Rendered output examples
+daxa_gui_settings.ini # QSettings file often local
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Pyppeteer/Headless Chrome (if used as a *dev* tool for comparison, not runtime)
+.local-chromium/
+
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Distribution / packaging
+*.spec # PyInstaller
+
+# MyPy
+.mypy_cache/
