@@ -1,4 +1,11 @@
-# Daxa System : The Unified Language Platform
+# Daxa - Python Edition
+
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<!-- Add build status, coverage badges etc. once CI is set up -->
+<!-- ![Build Status](...) -->
+
+![Daxa Logo](./assets/logo.png) <!-- Assuming logo.png is in assets -->
 
 **Daxa: One Language for Documents, Data, Diagrams, Math, and Configuration.**
 
